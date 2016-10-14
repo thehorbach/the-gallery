@@ -13,6 +13,7 @@
 		11E74BC61DB0F05B0096D1B4 /* TheGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11E74BC41DB0F05B0096D1B4 /* TheGallery.xcdatamodeld */; };
 		11E74BC81DB0F05B0096D1B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11E74BC71DB0F05B0096D1B4 /* Assets.xcassets */; };
 		11E74BCB1DB0F05B0096D1B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E74BC91DB0F05B0096D1B4 /* LaunchScreen.storyboard */; };
+		11E74BD31DB0F4EA0096D1B4 /* ArtCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E74BD21DB0F4EA0096D1B4 /* ArtCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		11E74BC71DB0F05B0096D1B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11E74BCA1DB0F05B0096D1B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11E74BCC1DB0F05B0096D1B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11E74BD21DB0F4EA0096D1B4 /* ArtCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				11E74BBD1DB0F05B0096D1B4 /* AppDelegate.swift */,
 				11E74BBF1DB0F05B0096D1B4 /* ViewController.swift */,
+				11E74BD21DB0F4EA0096D1B4 /* ArtCollectionViewCell.swift */,
 				11E74BC11DB0F05B0096D1B4 /* Main.storyboard */,
 				11E74BC71DB0F05B0096D1B4 /* Assets.xcassets */,
 				11E74BC91DB0F05B0096D1B4 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E74BD31DB0F4EA0096D1B4 /* ArtCollectionViewCell.swift in Sources */,
 				11E74BC01DB0F05B0096D1B4 /* ViewController.swift in Sources */,
 				11E74BC61DB0F05B0096D1B4 /* TheGallery.xcdatamodeld in Sources */,
 				11E74BBE1DB0F05B0096D1B4 /* AppDelegate.swift in Sources */,
