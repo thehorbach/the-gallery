@@ -24,9 +24,9 @@ class ViewController: UIViewController {
         updateGallery()
         
         if gallery.count == 0 {
-            createArt(title: "hello", productIdentifier: "", imageName: "", purchased: true)
-            createArt(title: "hello", productIdentifier: "", imageName: "", purchased: true)
-            createArt(title: "hello", productIdentifier: "", imageName: "", purchased: true)
+            createArt(title: "Animal", productIdentifier: "", imageName: "pic-1.jpeg", purchased: true)
+            createArt(title: "Forest", productIdentifier: "", imageName: "pic-2.jpeg", purchased: true)
+            createArt(title: "City", productIdentifier: "", imageName: "pic-3.jpeg", purchased: true)
             
             updateGallery()
             self.collectionView.reloadData()
@@ -82,7 +82,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ArtCollectionViewCell
+        
+        let art = gallery[indexPath.item]
+        
+        cell.artImageView.image = UIImage(named: art.imageName!)
+        cell.artLabel.text = art.title
         
         return cell
     }

@@ -27,20 +27,40 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GrC-eG-QzR">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="30" minimumInteritemSpacing="10" id="EGc-wN-zhZ">
-                                    <size key="itemSize" width="275" height="525"/>
+                                    <size key="itemSize" width="321" height="525"/>
                                     <size key="headerReferenceSize" width="30" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="30"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="ZJw-iv-xJF" customClass="ArtCollectionViewCell" customModule="TheGallery" customModuleProvider="target">
-                                        <rect key="frame" x="30" y="2" width="275" height="525"/>
+                                        <rect key="frame" x="30" y="2" width="321" height="525"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="275" height="525"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="321" height="525"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF8-tN-E8L">
+                                                    <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qYR-sv-AD7"/>
+                                            </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.88235294119999996" green="0.23529411759999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="bF8-tN-E8L" firstAttribute="leading" secondItem="ZJw-iv-xJF" secondAttribute="leadingMargin" id="2cv-Ao-blZ"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="bF8-tN-E8L" secondAttribute="bottom" constant="-10" id="ZLT-M8-Q6Z"/>
+                                            <constraint firstItem="qYR-sv-AD7" firstAttribute="leading" secondItem="ZJw-iv-xJF" secondAttribute="leadingMargin" id="Zt8-Eo-Foq"/>
+                                            <constraint firstItem="qYR-sv-AD7" firstAttribute="top" secondItem="ZJw-iv-xJF" secondAttribute="topMargin" id="eDy-ka-SKH"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="bF8-tN-E8L" secondAttribute="trailing" id="fun-WH-OqE"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="qYR-sv-AD7" secondAttribute="trailing" id="kNV-nn-XSl"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="qYR-sv-AD7" secondAttribute="bottom" constant="50" id="rfR-1U-pQN"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="artImageView" destination="qYR-sv-AD7" id="zfQ-bx-wb3"/>
+                                            <outlet property="artLabel" destination="bF8-tN-E8L" id="Gfh-Tj-M77"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vBl-QS-s2E">
@@ -48,6 +68,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ycb-5U-h9e">
+                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>
