@@ -25,8 +25,8 @@ class ViewController: UIViewController {
         
         if gallery.count == 0 {
             createArt(title: "Animal", productIdentifier: "", imageName: "pic-1.jpeg", purchased: true)
-            createArt(title: "Forest", productIdentifier: "", imageName: "pic-2.jpeg", purchased: true)
-            createArt(title: "City", productIdentifier: "", imageName: "pic-3.jpeg", purchased: true)
+            createArt(title: "Forest", productIdentifier: "", imageName: "pic-2.jpeg", purchased: false)
+            createArt(title: "City", productIdentifier: "", imageName: "pic-3.jpeg", purchased: false)
             
             updateGallery()
             self.collectionView.reloadData()
@@ -85,6 +85,25 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ArtCollectionViewCell
         
         let art = gallery[indexPath.item]
+        
+        
+        for subview in cell.artImageView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        switch art.purchased {
+        case true:
+            cell.purchaseLabel.isHidden = true
+            
+        case false:
+            cell.purchaseLabel.isHidden = false
+            
+            let blurEffect = UIBlurEffect(style: .dark)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            cell.layoutIfNeeded()
+            blurView.frame = cell.artImageView.bounds
+            cell.artImageView.addSubview(blurView)
+        }
         
         cell.artImageView.image = UIImage(named: art.imageName!)
         cell.artLabel.text = art.title
