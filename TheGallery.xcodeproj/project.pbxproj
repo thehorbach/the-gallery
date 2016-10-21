@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11375D581DB8166600D3CEAC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11375D571DB8166600D3CEAC /* StoreKit.framework */; };
 		11E74BBE1DB0F05B0096D1B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E74BBD1DB0F05B0096D1B4 /* AppDelegate.swift */; };
 		11E74BC01DB0F05B0096D1B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E74BBF1DB0F05B0096D1B4 /* ViewController.swift */; };
 		11E74BC31DB0F05B0096D1B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11E74BC11DB0F05B0096D1B4 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11375D571DB8166600D3CEAC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		11E74BBA1DB0F05B0096D1B4 /* TheGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E74BBD1DB0F05B0096D1B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11E74BBF1DB0F05B0096D1B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,17 +45,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11375D581DB8166600D3CEAC /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11375D561DB8166600D3CEAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11375D571DB8166600D3CEAC /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		11E74BB11DB0F05A0096D1B4 = {
 			isa = PBXGroup;
 			children = (
 				11E74BBC1DB0F05B0096D1B4 /* TheGallery */,
 				11E74BBB1DB0F05B0096D1B4 /* Products */,
+				11375D561DB8166600D3CEAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +131,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = AC6K9V2C7Z;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -287,6 +304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = AC6K9V2C7Z;
 				INFOPLIST_FILE = TheGallery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -300,6 +318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = AC6K9V2C7Z;
 				INFOPLIST_FILE = TheGallery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

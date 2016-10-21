@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import StoreKit
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     var gallery = [Art]()
+    var products = [SKProduct]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +26,16 @@ class ViewController: UIViewController {
         updateGallery()
         
         if gallery.count == 0 {
-            createArt(title: "Animal", productIdentifier: "", imageName: "pic-1.jpeg", purchased: true)
-            createArt(title: "Forest", productIdentifier: "", imageName: "pic-2.jpeg", purchased: false)
-            createArt(title: "City", productIdentifier: "", imageName: "pic-3.jpeg", purchased: false)
+            
+            createArt(title: "City", productIdentifier: "", imageName: "pic-3.jpeg", purchased: true)
+            createArt(title: "Animal", productIdentifier: "com.gethomeworktutor.TheGallery.tigerart", imageName: "pic-1.jpeg", purchased: false)
+            createArt(title: "Forest", productIdentifier: "com.gethomeworktutor.TheGallery.natureart", imageName: "pic-2.jpeg", purchased: false)
             
             updateGallery()
             self.collectionView.reloadData()
         }
+        
+        requestProducts()
     }
     
     func createArt(title: String, productIdentifier: String, imageName: String, purchased: Bool) {
@@ -43,7 +48,7 @@ class ViewController: UIViewController {
             art.setValue(title, forKey: "title")
             art.setValue(productIdentifier, forKey: "productIdentifier")
             art.setValue(imageName, forKey: "imageName")
-            art.setValue(purchased.hashValue, forKey: "purchased")
+            art.setValue(purchased, forKey: "purchased")
             
             do {
                 try context.save()
@@ -72,9 +77,92 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    func unlockArt(productIdentifier: String) {
+        for art in self.gallery {
+            if art.productIdentifier == productIdentifier {
+                art.purchased = true
+                
+                let context = getContext()
+                
+                do {
+                    try context.save()
+                } catch {
+                    print(error)
+                }
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    @IBAction func restoreButtonDidTouch( _sender: AnyObject) {
+        SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+}
+
+extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserver {
+    
+    func requestProducts() {
+        let IDs: Set<String> = ["com.gethomeworktutor.TheGallery.tigerart",  "com.gethomeworktutor.TheGallery.natureart"]
+        let productsRequest = SKProductsRequest(productIdentifiers: IDs)
+        productsRequest.delegate = self
+        productsRequest.start()
+    }
+    
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        print("Products ready: \(response.products.count)")
+        print("Products notready: \(response.invalidProductIdentifiers.count)")
+        self.products = response.products
+        self.collectionView.reloadData()
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchased:
+                print("purchased")
+                unlockArt(productIdentifier: transaction.payment.productIdentifier)
+                SKPaymentQueue.default().finishTransaction(transaction)
+                return
+            case .failed:
+                print("failed")
+                SKPaymentQueue.default().finishTransaction(transaction)
+                return
+            case .restored:
+                print("restored")
+                unlockArt(productIdentifier: transaction.payment.productIdentifier)
+                SKPaymentQueue.default().finishTransaction(transaction)
+                return
+                
+            case .purchasing:
+                print("purchasing")
+                return
+            case .deferred:
+                print("deferred")
+                return
+            }
+        }
+    }
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let art = gallery[indexPath.item]
+        
+        guard art.purchased == false else {
+            return
+        }
+        
+        for product in products {
+            if product.productIdentifier == art.productIdentifier {
+                SKPaymentQueue.default().add(self)
+                let payment = SKPayment(product: product)
+                SKPaymentQueue.default().add(payment)
+            }
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gallery.count
@@ -103,6 +191,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.layoutIfNeeded()
             blurView.frame = cell.artImageView.bounds
             cell.artImageView.addSubview(blurView)
+            
+            for product in self.products {
+                if product.productIdentifier == art.productIdentifier {
+                    
+                    let formatter = NumberFormatter()
+                    formatter.numberStyle = NumberFormatter.Style.currency
+                    formatter.locale = product.priceLocale
+                    let price = formatter.string(from: product.price)!
+                    
+                    cell.purchaseLabel.text = "Buy for \(price)"
+                }
+            }
         }
         
         cell.artImageView.image = UIImage(named: art.imageName!)

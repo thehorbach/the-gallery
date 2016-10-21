@@ -84,6 +84,9 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9Y-mT-CiD">
                                 <state key="normal" title="Restore"/>
+                                <connections>
+                                    <action selector="restoreButtonDidTouchWith_sender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8I4-Dk-bF2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
