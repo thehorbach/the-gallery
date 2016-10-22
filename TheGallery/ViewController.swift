@@ -103,6 +103,7 @@ class ViewController: UIViewController {
 
 extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
+    // 1. Request products
     func requestProducts() {
         let IDs: Set<String> = ["com.gethomeworktutor.TheGallery.tigerart",  "com.gethomeworktutor.TheGallery.natureart"]
         let productsRequest = SKProductsRequest(productIdentifiers: IDs)
@@ -110,6 +111,7 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
         productsRequest.start()
     }
     
+    // 2. Handle response after request - successful x unsuccessful request of products
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         print("Products ready: \(response.products.count)")
         print("Products notready: \(response.invalidProductIdentifiers.count)")
@@ -117,6 +119,7 @@ extension ViewController: SKProductsRequestDelegate, SKPaymentTransactionObserve
         self.collectionView.reloadData()
     }
     
+    // 5. Receive response from Apple what was it about the product
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch transaction.transactionState {
@@ -157,6 +160,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         for product in products {
             if product.productIdentifier == art.productIdentifier {
+                
+                //4. Add product to the queue to purchase it
                 SKPaymentQueue.default().add(self)
                 let payment = SKPayment(product: product)
                 SKPaymentQueue.default().add(payment)
@@ -195,6 +200,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             for product in self.products {
                 if product.productIdentifier == art.productIdentifier {
                     
+                    //3. Show products for purchase
                     let formatter = NumberFormatter()
                     formatter.numberStyle = NumberFormatter.Style.currency
                     formatter.locale = product.priceLocale
