@@ -161,10 +161,19 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         for product in products {
             if product.productIdentifier == art.productIdentifier {
                 
-                //4. Add product to the queue to purchase it
+                //IMPORTANT: Do this in AppDelegate instead!
                 SKPaymentQueue.default().add(self)
+                
+                //4. Add product to the queue to purchase it
                 let payment = SKPayment(product: product)
                 SKPaymentQueue.default().add(payment)
+                
+                /* 
+                NOTE: Simulated deffered payment (wait for approval childer
+                 
+                let payment = SKMutablePayment(product: product)
+                payment.simulatesAskToBuyInSandbox = true
+                */
             }
         }
     }
